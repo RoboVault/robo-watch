@@ -1,0 +1,472 @@
+[
+    {
+        "timestamp": "1644443023000",
+        "gain": "1321948794366620063180",
+        "loss": "0",
+        "totalGain": "10356542560650267538201",
+        "totalLoss": "0",
+        "totalDebt": "698201575776687596346007",
+        "debtLimit": "7000",
+        "debtAdded": "446549999181335505418162",
+        "debtPaid": "0",
+        "profit": "1321948794366620063180",
+        "totalProfit": "10356542560650267538201",
+        "transactionHash": "0x9ef7a35012286fef17da12624aa124ebc785d9e7621e1fd538550d1209eb9f7d",
+        "results": {
+            "startTimestamp": 1644003375000,
+            "endTimestamp": 1644443023000,
+            "duration": 439648000,
+            "apr": 13.581111461837395,
+            "durationPr": 0.0018933626623458544,
+            "currentReport": {
+                "id": "0x9ef7a35012286fef17da12624aa124ebc785d9e7621e1fd538550d1209eb9f7d-89",
+                "gain": "1321948794366620063180",
+                "loss": "0",
+                "totalDebt": "698201575776687596346007",
+                "totalGain": "10356542560650267538201",
+                "totalLoss": "0",
+                "timestamp": "1644443023000",
+                "transaction": {
+                    "hash": "0x9ef7a35012286fef17da12624aa124ebc785d9e7621e1fd538550d1209eb9f7d",
+                    "blockNumber": "14174380"
+                }
+            },
+            "previousReport": {
+                "id": "0x852169955ead2e6e8e43b3bcaf0baee70f639e1fee06e916e9ea0a01dc4f0d61-34",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "251651576595352090927845",
+                "totalGain": "9034593766283647475021",
+                "totalLoss": "0",
+                "timestamp": "1644003375000",
+                "transaction": {
+                    "hash": "0x852169955ead2e6e8e43b3bcaf0baee70f639e1fee06e916e9ea0a01dc4f0d61",
+                    "blockNumber": "14141466"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1644003375000",
+        "gain": "0",
+        "loss": "0",
+        "totalGain": "9034593766283647475021",
+        "totalLoss": "0",
+        "totalDebt": "251651576595352090927845",
+        "debtLimit": "10000",
+        "debtAdded": "21791827639184775549567",
+        "debtPaid": "0",
+        "profit": "0",
+        "totalProfit": "9034593766283647475021",
+        "transactionHash": "0x852169955ead2e6e8e43b3bcaf0baee70f639e1fee06e916e9ea0a01dc4f0d61",
+        "results": {
+            "startTimestamp": 1643607293000,
+            "endTimestamp": 1644003375000,
+            "duration": 396082000,
+            "apr": 0,
+            "durationPr": 0,
+            "currentReport": {
+                "id": "0x852169955ead2e6e8e43b3bcaf0baee70f639e1fee06e916e9ea0a01dc4f0d61-34",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "251651576595352090927845",
+                "totalGain": "9034593766283647475021",
+                "totalLoss": "0",
+                "timestamp": "1644003375000",
+                "transaction": {
+                    "hash": "0x852169955ead2e6e8e43b3bcaf0baee70f639e1fee06e916e9ea0a01dc4f0d61",
+                    "blockNumber": "14141466"
+                }
+            },
+            "previousReport": {
+                "id": "0xd770356649f1e60e7342713d483bd8946f967e544db639bd056dfccc8d534d8e-101",
+                "gain": "2878296351452688797384",
+                "loss": "0",
+                "totalDebt": "229859748956167315378278",
+                "totalGain": "9034593766283647475021",
+                "totalLoss": "0",
+                "timestamp": "1643607293000",
+                "transaction": {
+                    "hash": "0xd770356649f1e60e7342713d483bd8946f967e544db639bd056dfccc8d534d8e",
+                    "blockNumber": "14111772"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1643607293000",
+        "gain": "2878296351452688797384",
+        "loss": "0",
+        "totalGain": "9034593766283647475021",
+        "totalLoss": "0",
+        "totalDebt": "229859748956167315378278",
+        "debtLimit": "10000",
+        "debtAdded": "132993969274236161316847",
+        "debtPaid": "0",
+        "profit": "2878296351452688797384",
+        "totalProfit": "9034593766283647475021",
+        "transactionHash": "0xd770356649f1e60e7342713d483bd8946f967e544db639bd056dfccc8d534d8e",
+        "results": {
+            "startTimestamp": 1642030952000,
+            "endTimestamp": 1643607293000,
+            "duration": 1576341000,
+            "apr": 25.05122770502724,
+            "durationPr": 0.012521967697796278,
+            "currentReport": {
+                "id": "0xd770356649f1e60e7342713d483bd8946f967e544db639bd056dfccc8d534d8e-101",
+                "gain": "2878296351452688797384",
+                "loss": "0",
+                "totalDebt": "229859748956167315378278",
+                "totalGain": "9034593766283647475021",
+                "totalLoss": "0",
+                "timestamp": "1643607293000",
+                "transaction": {
+                    "hash": "0xd770356649f1e60e7342713d483bd8946f967e544db639bd056dfccc8d534d8e",
+                    "blockNumber": "14111772"
+                }
+            },
+            "previousReport": {
+                "id": "0x6f8daf16f07b9e9dfbfcc884e90a3a8bb0cf8d4420c2e5a32c556e6f89339c1b-32",
+                "gain": "690595497619623364583",
+                "loss": "0",
+                "totalDebt": "128986041903471401718186",
+                "totalGain": "6156297414830958677637",
+                "totalLoss": "0",
+                "timestamp": "1642030952000",
+                "transaction": {
+                    "hash": "0x6f8daf16f07b9e9dfbfcc884e90a3a8bb0cf8d4420c2e5a32c556e6f89339c1b",
+                    "blockNumber": "13993757"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1642030952000",
+        "gain": "690595497619623364583",
+        "loss": "0",
+        "totalGain": "6156297414830958677637",
+        "totalLoss": "0",
+        "totalDebt": "128986041903471401718186",
+        "debtLimit": "5000",
+        "debtAdded": "897287640417607282400",
+        "debtPaid": "0",
+        "profit": "690595497619623364583",
+        "totalProfit": "6156297414830958677637",
+        "transactionHash": "0x6f8daf16f07b9e9dfbfcc884e90a3a8bb0cf8d4420c2e5a32c556e6f89339c1b",
+        "results": {
+            "startTimestamp": 1641259914000,
+            "endTimestamp": 1642030952000,
+            "duration": 771038000,
+            "apr": 21.898373104890258,
+            "durationPr": 0.005354032788574446,
+            "currentReport": {
+                "id": "0x6f8daf16f07b9e9dfbfcc884e90a3a8bb0cf8d4420c2e5a32c556e6f89339c1b-32",
+                "gain": "690595497619623364583",
+                "loss": "0",
+                "totalDebt": "128986041903471401718186",
+                "totalGain": "6156297414830958677637",
+                "totalLoss": "0",
+                "timestamp": "1642030952000",
+                "transaction": {
+                    "hash": "0x6f8daf16f07b9e9dfbfcc884e90a3a8bb0cf8d4420c2e5a32c556e6f89339c1b",
+                    "blockNumber": "13993757"
+                }
+            },
+            "previousReport": {
+                "id": "0x0fe4ff35e795cddeeffad4ef8aeec45b1dffaa0744a9836ac709febb0e23d7b1-103",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "128088754263053794435786",
+                "totalGain": "5465701917211335313054",
+                "totalLoss": "0",
+                "timestamp": "1641259914000",
+                "transaction": {
+                    "hash": "0x0fe4ff35e795cddeeffad4ef8aeec45b1dffaa0744a9836ac709febb0e23d7b1",
+                    "blockNumber": "13936043"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1641259914000",
+        "gain": "0",
+        "loss": "0",
+        "totalGain": "5465701917211335313054",
+        "totalLoss": "0",
+        "totalDebt": "128088754263053794435786",
+        "debtLimit": "5000",
+        "debtAdded": "28497064829636722191291",
+        "debtPaid": "0",
+        "profit": "0",
+        "totalProfit": "5465701917211335313054",
+        "transactionHash": "0x0fe4ff35e795cddeeffad4ef8aeec45b1dffaa0744a9836ac709febb0e23d7b1",
+        "results": {
+            "startTimestamp": 1641137862000,
+            "endTimestamp": 1641259914000,
+            "duration": 122052000,
+            "apr": 0,
+            "durationPr": 0,
+            "currentReport": {
+                "id": "0x0fe4ff35e795cddeeffad4ef8aeec45b1dffaa0744a9836ac709febb0e23d7b1-103",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "128088754263053794435786",
+                "totalGain": "5465701917211335313054",
+                "totalLoss": "0",
+                "timestamp": "1641259914000",
+                "transaction": {
+                    "hash": "0x0fe4ff35e795cddeeffad4ef8aeec45b1dffaa0744a9836ac709febb0e23d7b1",
+                    "blockNumber": "13936043"
+                }
+            },
+            "previousReport": {
+                "id": "0x89e793b959f4b4726c83e74d88c91c29d84bf3d06e157025a5089ec4af941194-96",
+                "gain": "376416041239785798414",
+                "loss": "0",
+                "totalDebt": "99880411438550853428381",
+                "totalGain": "5465701917211335313054",
+                "totalLoss": "0",
+                "timestamp": "1641137862000",
+                "transaction": {
+                    "hash": "0x89e793b959f4b4726c83e74d88c91c29d84bf3d06e157025a5089ec4af941194",
+                    "blockNumber": "13926881"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1641137862000",
+        "gain": "376416041239785798414",
+        "loss": "0",
+        "totalGain": "5465701917211335313054",
+        "totalLoss": "0",
+        "totalDebt": "99880411438550853428381",
+        "debtLimit": "5000",
+        "debtAdded": "361891311883986519115",
+        "debtPaid": "0",
+        "profit": "376416041239785798414",
+        "totalProfit": "5465701917211335313054",
+        "transactionHash": "0x89e793b959f4b4726c83e74d88c91c29d84bf3d06e157025a5089ec4af941194",
+        "results": {
+            "startTimestamp": 1640719388000,
+            "endTimestamp": 1641137862000,
+            "duration": 418474000,
+            "apr": 28.400496137559312,
+            "durationPr": 0.0037686673074166016,
+            "currentReport": {
+                "id": "0x89e793b959f4b4726c83e74d88c91c29d84bf3d06e157025a5089ec4af941194-96",
+                "gain": "376416041239785798414",
+                "loss": "0",
+                "totalDebt": "99880411438550853428381",
+                "totalGain": "5465701917211335313054",
+                "totalLoss": "0",
+                "timestamp": "1641137862000",
+                "transaction": {
+                    "hash": "0x89e793b959f4b4726c83e74d88c91c29d84bf3d06e157025a5089ec4af941194",
+                    "blockNumber": "13926881"
+                }
+            },
+            "previousReport": {
+                "id": "0x73fa8dc1b6950e0ce7d5cf580cd223eaf7d1bb23fb1af6c6a19b0bb0e3f21f4e-43",
+                "gain": "252320297645815220034",
+                "loss": "0",
+                "totalDebt": "109357958520589030600024",
+                "totalGain": "5089285875971549514640",
+                "totalLoss": "0",
+                "timestamp": "1640719388000",
+                "transaction": {
+                    "hash": "0x73fa8dc1b6950e0ce7d5cf580cd223eaf7d1bb23fb1af6c6a19b0bb0e3f21f4e",
+                    "blockNumber": "13895597"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1640719388000",
+        "gain": "252320297645815220034",
+        "loss": "0",
+        "totalGain": "5089285875971549514640",
+        "totalLoss": "0",
+        "totalDebt": "109357958520589030600024",
+        "debtLimit": "5000",
+        "debtAdded": "0",
+        "debtPaid": "71252705530584480070854",
+        "profit": "252320297645815220034",
+        "totalProfit": "5089285875971549514640",
+        "transactionHash": "0x73fa8dc1b6950e0ce7d5cf580cd223eaf7d1bb23fb1af6c6a19b0bb0e3f21f4e",
+        "results": {
+            "startTimestamp": 1640447451000,
+            "endTimestamp": 1640719388000,
+            "duration": 271937000,
+            "apr": 26.757165127278483,
+            "durationPr": 0.00230728792910221,
+            "currentReport": {
+                "id": "0x73fa8dc1b6950e0ce7d5cf580cd223eaf7d1bb23fb1af6c6a19b0bb0e3f21f4e-43",
+                "gain": "252320297645815220034",
+                "loss": "0",
+                "totalDebt": "109357958520589030600024",
+                "totalGain": "5089285875971549514640",
+                "totalLoss": "0",
+                "timestamp": "1640719388000",
+                "transaction": {
+                    "hash": "0x73fa8dc1b6950e0ce7d5cf580cd223eaf7d1bb23fb1af6c6a19b0bb0e3f21f4e",
+                    "blockNumber": "13895597"
+                }
+            },
+            "previousReport": {
+                "id": "0xc86bfe96d32de593dd560ddb40fef38670df7b223bad0c2193165e998c151df2-121",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "181397927002544496765382",
+                "totalGain": "4836965578325734294606",
+                "totalLoss": "0",
+                "timestamp": "1640447451000",
+                "transaction": {
+                    "hash": "0xc86bfe96d32de593dd560ddb40fef38670df7b223bad0c2193165e998c151df2",
+                    "blockNumber": "13875267"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1640447451000",
+        "gain": "0",
+        "loss": "0",
+        "totalGain": "4836965578325734294606",
+        "totalLoss": "0",
+        "totalDebt": "181397927002544496765382",
+        "debtLimit": "10000",
+        "debtAdded": "16407379729253354797514",
+        "debtPaid": "0",
+        "profit": "0",
+        "totalProfit": "4836965578325734294606",
+        "transactionHash": "0xc86bfe96d32de593dd560ddb40fef38670df7b223bad0c2193165e998c151df2",
+        "results": {
+            "startTimestamp": 1639927310000,
+            "endTimestamp": 1640447451000,
+            "duration": 520141000,
+            "apr": 0,
+            "durationPr": 0,
+            "currentReport": {
+                "id": "0xc86bfe96d32de593dd560ddb40fef38670df7b223bad0c2193165e998c151df2-121",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "181397927002544496765382",
+                "totalGain": "4836965578325734294606",
+                "totalLoss": "0",
+                "timestamp": "1640447451000",
+                "transaction": {
+                    "hash": "0xc86bfe96d32de593dd560ddb40fef38670df7b223bad0c2193165e998c151df2",
+                    "blockNumber": "13875267"
+                }
+            },
+            "previousReport": {
+                "id": "0xf1cf1bd78c4322f452e6d6961121e32156c353ba9c042494b8afcf6483e1638f-19",
+                "gain": "471464756121868664648",
+                "loss": "0",
+                "totalDebt": "168352680295969719282222",
+                "totalGain": "4836965578325734294606",
+                "totalLoss": "0",
+                "timestamp": "1639927310000",
+                "transaction": {
+                    "hash": "0xf1cf1bd78c4322f452e6d6961121e32156c353ba9c042494b8afcf6483e1638f",
+                    "blockNumber": "13836385"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1639927310000",
+        "gain": "471464756121868664648",
+        "loss": "0",
+        "totalGain": "4836965578325734294606",
+        "totalLoss": "0",
+        "totalDebt": "168352680295969719282222",
+        "debtLimit": "10000",
+        "debtAdded": "21127720580831628174667",
+        "debtPaid": "0",
+        "profit": "471464756121868664648",
+        "totalProfit": "4836965578325734294606",
+        "transactionHash": "0xf1cf1bd78c4322f452e6d6961121e32156c353ba9c042494b8afcf6483e1638f",
+        "results": {
+            "startTimestamp": 1639848736000,
+            "endTimestamp": 1639927310000,
+            "duration": 78574000,
+            "apr": 112.39757527039527,
+            "durationPr": 0.0028004588658346137,
+            "currentReport": {
+                "id": "0xf1cf1bd78c4322f452e6d6961121e32156c353ba9c042494b8afcf6483e1638f-19",
+                "gain": "471464756121868664648",
+                "loss": "0",
+                "totalDebt": "168352680295969719282222",
+                "totalGain": "4836965578325734294606",
+                "totalLoss": "0",
+                "timestamp": "1639927310000",
+                "transaction": {
+                    "hash": "0xf1cf1bd78c4322f452e6d6961121e32156c353ba9c042494b8afcf6483e1638f",
+                    "blockNumber": "13836385"
+                }
+            },
+            "previousReport": {
+                "id": "0x0d2201689bc540a72fd22356edd6d961db3f3dd4f2226b9d1bd9076a4aafba07-303",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "147224959715138091107555",
+                "totalGain": "4365500822203865629958",
+                "totalLoss": "0",
+                "timestamp": "1639848736000",
+                "transaction": {
+                    "hash": "0x0d2201689bc540a72fd22356edd6d961db3f3dd4f2226b9d1bd9076a4aafba07",
+                    "blockNumber": "13830469"
+                }
+            }
+        }
+    },
+    {
+        "timestamp": "1639848736000",
+        "gain": "0",
+        "loss": "0",
+        "totalGain": "4365500822203865629958",
+        "totalLoss": "0",
+        "totalDebt": "147224959715138091107555",
+        "debtLimit": "10000",
+        "debtAdded": "21422272630417370415575",
+        "debtPaid": "0",
+        "profit": "0",
+        "totalProfit": "4365500822203865629958",
+        "transactionHash": "0x0d2201689bc540a72fd22356edd6d961db3f3dd4f2226b9d1bd9076a4aafba07",
+        "results": {
+            "startTimestamp": 1639440162000,
+            "endTimestamp": 1639848736000,
+            "duration": 408574000,
+            "apr": 0,
+            "durationPr": 0,
+            "currentReport": {
+                "id": "0x0d2201689bc540a72fd22356edd6d961db3f3dd4f2226b9d1bd9076a4aafba07-303",
+                "gain": "0",
+                "loss": "0",
+                "totalDebt": "147224959715138091107555",
+                "totalGain": "4365500822203865629958",
+                "totalLoss": "0",
+                "timestamp": "1639848736000",
+                "transaction": {
+                    "hash": "0x0d2201689bc540a72fd22356edd6d961db3f3dd4f2226b9d1bd9076a4aafba07",
+                    "blockNumber": "13830469"
+                }
+            },
+            "previousReport": {
+                "id": "0x70398db92488920213713177bfee1db9dbb2d80809faed0ad3218ce45ce463a7-60",
+                "gain": "496932990614435978934",
+                "loss": "0",
+                "totalDebt": "125802687084720720691980",
+                "totalGain": "4365500822203865629958",
+                "totalLoss": "0",
+                "timestamp": "1639440162000",
+                "transaction": {
+                    "hash": "0x70398db92488920213713177bfee1db9dbb2d80809faed0ad3218ce45ce463a7",
+                    "blockNumber": "13800007"
+                }
+            }
+        }
+    }
+]

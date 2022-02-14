@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
   body {
     margin: 16px 0;
-    background-image: ${({ theme }) => theme.backgroundImage};
+    background-color: ${({ theme }) => theme.backgroundColor};
     background-repeat: no-repeat; 
     background-position: center;
     
@@ -25,7 +25,7 @@ export const GlobalStyles = createGlobalStyle`
 export const GlobalStylesLoading = createGlobalStyle`
   body {
     box-sizing: border-box;
-    background-image: ${({ theme }) => theme.backgroundImageLoading};
+    background-color: ${({ theme }) => theme.backgroundColorLoading};
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;

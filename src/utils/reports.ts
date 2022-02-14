@@ -1,6 +1,7 @@
 import { difference, get, omit, memoize } from 'lodash';
 import { Network } from '../types';
 import { querySubgraphData } from './apisRequest';
+import { getService } from '../services/VaultService';
 
 import { StrategyReportContextValue } from '../contexts/StrategyReportContext';
 
@@ -220,7 +221,16 @@ export const _getReportsForStrategies = async (
 
     // Only query for uncached strategies
     const strategiesToQuery = difference(strategies, cachedStrategies);
-    if (strategiesToQuery.length > 0) {
+    if (strategiesToQuery.length <= 0) return;
+
+    // TODO: droidmuncher: Move logic into VaultService to remove the need for this check
+    if (network === Network.fantom) {
+        const service = getService(network);
+        for (const stratAddress of strategies) {
+            const reports = await service.getStrategyReport(stratAddress);
+            strategyReports[stratAddress.toLowerCase()] = reports;
+        }
+    } else {
         const reportResults: StratReportGraphResult = await querySubgraphData(
             buildReportsQuery(strategiesToQuery.map((s) => s.toLowerCase())),
             network
@@ -231,13 +241,14 @@ export const _getReportsForStrategies = async (
             'data.strategies',
             []
         );
+
         strategyResults.forEach((results) => {
-            strategyReports[results.id.toLowerCase()] = _parseReportValues(
-                results.reports
-            );
+            const finalReport = _parseReportValues(results.reports);
+            strategyReports[results.id.toLowerCase()] = finalReport;
         });
-        updateStrategyReports(strategyReports);
     }
+
+    updateStrategyReports(strategyReports);
 };
 
 export const getReportsForStrategies = memoize(_getReportsForStrategies);

@@ -1,6 +1,6 @@
 import { Network, VaultService } from '../../types';
+import RoboFantomService from './robo-fantom';
 import EthereumService from './ethereum';
-import FantomService from './fantom';
 import ArbitrumService from './arbitrum';
 
 import { checkNetworkSupported } from '../../utils/network';
@@ -12,7 +12,7 @@ export const getService = (network: Network): VaultService => {
         case Network.mainnet:
             return new EthereumService();
         case Network.fantom:
-            return new FantomService();
+            return new RoboFantomService();
         case Network.arbitrum:
             return new ArbitrumService();
         default:

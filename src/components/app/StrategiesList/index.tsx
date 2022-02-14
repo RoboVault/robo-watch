@@ -168,6 +168,12 @@ const _StrategiesList = (props: StrategiesListProps) => {
     const displayAverageApr = (strategyId: string): string => {
         const reports =
             strategyReportContext.strategyReports[strategyId.toLowerCase()];
+        if (reports === undefined) {
+            console.error(
+                `Strategy Report could not be found for strategyId: ${strategyId}`
+            );
+            return '?.?%';
+        }
         const aprList = compact(reports.map((item) => item.results?.apr));
         const averageApr = aprList.length === 0 ? 0 : mean(aprList);
         return `${averageApr.toFixed(2)}%`;

@@ -9,8 +9,8 @@ import Container from '@material-ui/core/Container';
 import styled from 'styled-components';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-import logoYearnLight from '../../../images/logo_yearn_watch_light.svg';
-import logoYearnDark from '../../../images/logo_yearn_watch_dark.svg';
+import logoRoboVaultLight from '../../../images/logo_robo_vault.png';
+import logoRoboVaultDark from '../../../images/logo_robo_vault.png';
 import Link from '@material-ui/core/Link';
 import NetworkSelect from '../../common/NetworkSelect';
 import { Network } from '../../../types';
@@ -80,8 +80,8 @@ export const NavBar: React.FC<NavBarProps> = ({ themeToggler, theme }) => {
                                 alt="yearn watch"
                                 src={
                                     theme === 'light'
-                                        ? logoYearnLight
-                                        : logoYearnDark
+                                        ? logoRoboVaultLight
+                                        : logoRoboVaultDark
                                 }
                             />
                         </Link>

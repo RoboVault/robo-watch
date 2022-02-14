@@ -18,6 +18,7 @@ import {
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
 } from '../../types';
+import { StrategyReport } from '../../utils';
 
 type StrategyBasicData = {
     [vault: string]: StrategyApi[];
@@ -191,4 +192,14 @@ export default class ArbitrumService implements VaultService {
             description: metaData?.description,
         };
     };
+
+    /**
+     * TODO: droidmuncher: Copy over logic from `reports.ts`
+     */
+    public async getStrategyReport(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        strategyAddress: string
+    ): Promise<StrategyReport[]> {
+        return new Promise((resolve) => resolve([]));
+    }
 }
