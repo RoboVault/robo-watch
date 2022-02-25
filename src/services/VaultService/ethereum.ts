@@ -8,7 +8,8 @@ import {
     DEFAULT_NETWORK,
     StrategyMetaData,
 } from '../../types';
-import { StrategyReport } from '../../utils';
+import { StrategyWithReports } from '../../utils';
+import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import {
     getTotalVaults,
@@ -73,13 +74,12 @@ export default class EthereumService implements VaultService {
         };
     };
 
-    /**
-     * TODO: droidmuncher: Copy over logic from `reports.ts`
-     */
-    public async getStrategyReport(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        strategyAddress: string
-    ): Promise<StrategyReport[]> {
-        return new Promise((resolve) => resolve([]));
+    public async getStrategyReports(
+        strategyAddresses: string[]
+    ): Promise<StrategyWithReports[]> {
+        return querySubgraphStrategyReports(
+            strategyAddresses,
+            this.getNetwork()
+        );
     }
 }

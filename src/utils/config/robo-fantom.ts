@@ -5,7 +5,9 @@ import {
     toNetworkConfig,
 } from '../../types';
 
-const FANTOM_SUBGRAPH_URL = 'not_yet_supported';
+// TODO: droidmuncher: figure out how to handle dev & prod environments
+const FANTOM_SUBGRAPH_URL =
+    'https://api.thegraph.com/subgraphs/name/droidmuncher/robo-vault-dev-subgraph';
 
 // Changed to match Robo vaults
 const GOVERNANCE_ENS = 'governance';

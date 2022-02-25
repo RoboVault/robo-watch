@@ -28,3 +28,11 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn style:check`
+
+Check if the code conforms to the prettier style guide
+
+### `yarn style:fix`
+
+Reformat all files to conform the prettier style guide

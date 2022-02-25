@@ -4,7 +4,10 @@ import memoize from 'lodash/memoize';
 import { JsonRpcProvider } from '@ethersproject/providers';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import { mapVaultDataToVault } from '../../utils/vaultDataMapping';
-import { querySubgraphData } from '../../utils/apisRequest';
+import {
+    querySubgraphData,
+    querySubgraphStrategyReports,
+} from '../../utils/apisRequest';
 import { mapVaultSdkToVaultApi, sortVaultsByVersion } from './mappings';
 
 import {
@@ -18,7 +21,7 @@ import {
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
 } from '../../types';
-import { StrategyReport } from '../../utils';
+import { StrategyWithReports } from '../../utils';
 
 type StrategyBasicData = {
     [vault: string]: StrategyApi[];
@@ -193,13 +196,12 @@ export default class ArbitrumService implements VaultService {
         };
     };
 
-    /**
-     * TODO: droidmuncher: Copy over logic from `reports.ts`
-     */
-    public async getStrategyReport(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        strategyAddress: string
-    ): Promise<StrategyReport[]> {
-        return new Promise((resolve) => resolve([]));
+    public async getStrategyReports(
+        strategyAddresses: string[]
+    ): Promise<StrategyWithReports[]> {
+        return querySubgraphStrategyReports(
+            strategyAddresses,
+            this.getNetwork()
+        );
     }
 }

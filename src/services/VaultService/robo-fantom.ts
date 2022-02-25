@@ -15,7 +15,8 @@ import {
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
 } from '../../types';
-import { StrategyReport } from '../../utils';
+import { StrategyWithReports } from '../../utils';
+import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 
 export default class RoboFantomService implements VaultService {
     private readonly roboSdk: RoboSdk;
@@ -76,21 +77,26 @@ export default class RoboFantomService implements VaultService {
         return vault;
     }
 
+    /**
+     * TODO: droidmuncher: Not yet implemented... Do robo strats have a description?
+     */
     public async getStrategyMetaData(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         vaultAddress: string,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         strategyAddress: string
     ): Promise<StrategyMetaData> {
-        const description = await this.roboSdk.getStrategyDescription(
-            strategyAddress
-        );
-        return { description };
+        const emptyMetaData = { description: undefined };
+        return new Promise((resolve) => resolve(emptyMetaData));
     }
 
-    public async getStrategyReport(
-        strategyAddress: string
-    ): Promise<StrategyReport[]> {
-        return this.roboSdk.getStrategyReport(strategyAddress);
+    public async getStrategyReports(
+        strategyAddresses: string[]
+    ): Promise<StrategyWithReports[]> {
+        return querySubgraphStrategyReports(
+            strategyAddresses,
+            this.getNetwork()
+        );
     }
 
     private async getInnerVaults(): Promise<VaultApi[]> {

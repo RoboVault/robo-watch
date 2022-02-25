@@ -4,6 +4,11 @@ import { memoize } from 'lodash';
 
 import getNetworkConfig from './config';
 import { Network } from '../types';
+import {
+    buildReportsQuery,
+    StrategyWithReports,
+    StratReportGraphResult,
+} from '.';
 
 export const { get, all, post, put, spread } = axios;
 
@@ -89,6 +94,22 @@ const querySubgraph = async (
         console.error('subgraph error', error);
         throw error;
     }
+};
+
+export const querySubgraphStrategyReports = async (
+    strategyAddresses: string[],
+    network: Network = Network.mainnet
+): Promise<StrategyWithReports[]> => {
+    const query = buildReportsQuery(
+        strategyAddresses.map((s) => s.toLowerCase())
+    );
+
+    const queryResult: StratReportGraphResult = await querySubgraphData(
+        query,
+        network
+    );
+
+    return queryResult?.data?.strategies ?? [];
 };
 
 export const querySubgraphData = memoize(querySubgraph);

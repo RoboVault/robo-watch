@@ -1,13 +1,12 @@
-import { difference, get, omit, memoize } from 'lodash';
+import { difference, omit, memoize } from 'lodash';
 import { Network } from '../types';
-import { querySubgraphData } from './apisRequest';
 import { getService } from '../services/VaultService';
 
 import { StrategyReportContextValue } from '../contexts/StrategyReportContext';
 
 const OMIT_FIELDS = ['results', 'transaction', 'id'];
 
-const buildReportsQuery = (strategies: string[]): string => `
+export const buildReportsQuery = (strategies: string[]): string => `
 {
     strategies(where: {
       id_in: ["${strategies.join('","')}"]
@@ -105,20 +104,15 @@ type StratReportGraphType = {
     };
 };
 
-type StratReportGraphResult = {
-    data: {
-        strategies: [
-            {
-                id: string;
-                reports: StratReportGraphType[];
-            }
-        ];
-    };
-};
-
-type Strategy = {
+export type StrategyWithReports = {
     id: string;
     reports: StratReportGraphType[];
+};
+
+export type StratReportGraphResult = {
+    data: {
+        strategies: StrategyWithReports[];
+    };
 };
 
 export type StrategyReport = {
@@ -223,29 +217,15 @@ export const _getReportsForStrategies = async (
     const strategiesToQuery = difference(strategies, cachedStrategies);
     if (strategiesToQuery.length <= 0) return;
 
-    // TODO: droidmuncher: Move logic into VaultService to remove the need for this check
-    if (network === Network.fantom) {
-        const service = getService(network);
-        for (const stratAddress of strategies) {
-            const reports = await service.getStrategyReport(stratAddress);
-            strategyReports[stratAddress.toLowerCase()] = reports;
-        }
-    } else {
-        const reportResults: StratReportGraphResult = await querySubgraphData(
-            buildReportsQuery(strategiesToQuery.map((s) => s.toLowerCase())),
-            network
-        );
+    const service = getService(network);
 
-        const strategyResults: Strategy[] = get(
-            reportResults,
-            'data.strategies',
-            []
-        );
+    const reportsByStrategy = await service.getStrategyReports(
+        strategiesToQuery
+    );
 
-        strategyResults.forEach((results) => {
-            const finalReport = _parseReportValues(results.reports);
-            strategyReports[results.id.toLowerCase()] = finalReport;
-        });
+    for (const strategy of reportsByStrategy) {
+        const parsedReports = _parseReportValues(strategy.reports);
+        strategyReports[strategy.id.toLowerCase()] = parsedReports;
     }
 
     updateStrategyReports(strategyReports);
