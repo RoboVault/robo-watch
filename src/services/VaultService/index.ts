@@ -1,5 +1,5 @@
 import { Network, VaultService } from '../../types';
-import RoboFantomService from './robo-fantom';
+import FantomService from './fantom';
 import EthereumService from './ethereum';
 import ArbitrumService from './arbitrum';
 
@@ -12,7 +12,7 @@ export const getService = (network: Network): VaultService => {
         case Network.mainnet:
             return new EthereumService();
         case Network.fantom:
-            return new RoboFantomService();
+            return new FantomService();
         case Network.arbitrum:
             return new ArbitrumService();
         default:

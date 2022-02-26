@@ -9,6 +9,8 @@ import {
 const FANTOM_SUBGRAPH_URL =
     'https://api.thegraph.com/subgraphs/name/droidmuncher/robo-vault-dev-subgraph';
 
+// TODO: droidmuncher: confirm if the changes made in this files are correct
+
 // Changed to match Robo vaults
 const GOVERNANCE_ENS = 'governance';
 const GOVERNANCE = '0xD074CDae76496d81Fab83023fee4d8631898bBAf';

@@ -7,9 +7,6 @@ import {
     VaultWithStrategies,
 } from '../types';
 
-/**
- * TODO: droidmuncher: Add memoize funcs
- */
 export class Subgraph {
     constructor(private readonly subgraphUrl: string) {}
 
@@ -19,7 +16,9 @@ export class Subgraph {
         let vaultFilter = '';
         if (vaultAddresses !== undefined) {
             const addressesLower = vaultAddresses.map((a) => a.toLowerCase());
-            vaultFilter = `where: { id_in: ${JSON.stringify(addressesLower)} }`;
+            vaultFilter = `( where: {
+                id_in: ${JSON.stringify(addressesLower)}
+            })`;
         }
 
         const query = `{
