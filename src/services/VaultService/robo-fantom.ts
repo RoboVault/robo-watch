@@ -1,10 +1,12 @@
-import { RoboSdk } from './robo-sdk';
-import { utils } from 'ethers';
 import memoize from 'lodash/memoize';
+import { RoboSdk } from '../robo-sdk';
+import { Subgraph } from '../subgraph';
+import { utils } from 'ethers';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import { mapVaultDataToVault } from '../../utils/vaultDataMapping';
 import { sortVaultsByVersion } from './mappings';
-import { querySubgraphStrategyReports } from '../../utils/apisRequest';
+import getNetworkConfig from '../../utils/config';
+
 import {
     NetworkId,
     Network,
@@ -21,8 +23,11 @@ export default class RoboFantomService implements VaultService {
     private readonly roboSdk: RoboSdk;
 
     constructor() {
-        const provider = getEthersDefaultProvider(this.getNetwork());
-        this.roboSdk = new RoboSdk(provider);
+        const network = this.getNetwork();
+        const provider = getEthersDefaultProvider(network);
+        const config = getNetworkConfig(network);
+        const subgraph = new Subgraph(config.subgraphUrl);
+        this.roboSdk = new RoboSdk(provider, subgraph);
     }
 
     public getNetwork(): Network {
@@ -92,15 +97,13 @@ export default class RoboFantomService implements VaultService {
     public async getStrategyReports(
         strategyAddresses: string[]
     ): Promise<StrategyWithReports[]> {
-        return querySubgraphStrategyReports(
-            strategyAddresses,
-            this.getNetwork()
-        );
+        return this.roboSdk.getStrategyReports(strategyAddresses);
     }
 
     private async getInnerVaults(): Promise<VaultApi[]> {
-        const vaults = await this.roboSdk.getVaults();
-        return sortVaultsByVersion([...vaults]);
+        const vaults = await this.roboSdk.getVaultsWithStrategies();
+        const detailedVaults = await this.roboSdk.getDetailedVaults(vaults);
+        return sortVaultsByVersion([...detailedVaults]);
     }
 
     private getVaultsMemoized = memoize(this.getInnerVaults);

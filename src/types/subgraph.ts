@@ -1,3 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export type SubgraphAPIResponse = {
+    data: {
+        data?: any;
+        errors?: any[];
+    };
+    status: number;
+    statusText: string;
+    config: any;
+    request: any;
+    headers: any;
+};
+
+export type SubgraphResponse = {
+    data: any;
+};
+
+export type VaultWithStrategies = {
+    id: string;
+    strategies: [
+        {
+            name: string;
+            address: string;
+        }
+    ];
+};
+
 export type StratReportGraphType = {
     debtAdded: string;
     debtLimit: string;

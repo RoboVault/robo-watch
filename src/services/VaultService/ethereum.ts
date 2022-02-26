@@ -9,8 +9,9 @@ import {
     StrategyMetaData,
     StrategyWithReports,
 } from '../../types';
-import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 import { getEthersDefaultProvider } from '../../utils/ethers';
+import getNetworkConfig from '../../utils/config';
+import { Subgraph } from '../subgraph';
 import {
     getTotalVaults,
     getVaultsWithPagination,
@@ -20,13 +21,17 @@ import {
 
 // TODO: refactor to use SDK instead of utils and move utils common mappings to service
 export default class EthereumService implements VaultService {
+    private subgraph: Subgraph;
     private sdk: Yearn<NetworkId.fantom>;
     constructor() {
-        const provider = getEthersDefaultProvider(this.getNetwork());
+        const network = this.getNetwork();
+        const provider = getEthersDefaultProvider(network);
         this.sdk = new Yearn(this.getNetworkId(), {
             provider,
             cache: { useCache: false },
         });
+        const config = getNetworkConfig(network);
+        this.subgraph = new Subgraph(config.subgraphUrl);
     }
 
     public getNetwork = (): Network => {
@@ -77,9 +82,6 @@ export default class EthereumService implements VaultService {
     public async getStrategyReports(
         strategyAddresses: string[]
     ): Promise<StrategyWithReports[]> {
-        return querySubgraphStrategyReports(
-            strategyAddresses,
-            this.getNetwork()
-        );
+        return this.subgraph.getStrategyReports(strategyAddresses);
     }
 }
