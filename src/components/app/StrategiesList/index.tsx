@@ -169,8 +169,8 @@ const _StrategiesList = (props: StrategiesListProps) => {
         const reports =
             strategyReportContext.strategyReports[strategyId.toLowerCase()];
         if (reports === undefined) {
-            console.error(
-                `Strategy Report could not be found for strategyId: ${strategyId}`
+            console.warn(
+                `Missing StrategyReport, could not calc APR (stratId: ${strategyId})`
             );
             return '?.?%';
         }

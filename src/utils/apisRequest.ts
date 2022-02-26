@@ -3,12 +3,7 @@ import axios from 'axios';
 import { memoize } from 'lodash';
 
 import getNetworkConfig from './config';
-import { Network } from '../types';
-import {
-    buildReportsQuery,
-    StrategyWithReports,
-    StratReportGraphResult,
-} from '.';
+import { Network, StrategyWithReports, StratReportGraphResult } from '../types';
 
 export const { get, all, post, put, spread } = axios;
 
@@ -96,6 +91,60 @@ const querySubgraph = async (
     }
 };
 
+export const querySubgraphData = memoize(querySubgraph);
+
+const buildReportsQuery = (strategies: string[]): string => `
+{
+    strategies(where: {
+      id_in: ["${strategies.join('","')}"]
+    }) {
+        id
+        reports(first: 10, orderBy: timestamp, orderDirection: desc)  {
+          id
+          transaction {
+            hash
+          }
+          timestamp
+          gain
+          loss
+          totalGain
+          totalLoss
+          totalDebt
+          debtLimit
+          debtAdded
+          debtPaid
+          results {
+            startTimestamp
+            endTimestamp
+            duration
+            apr
+            durationPr
+            currentReport {
+                id
+                gain
+                loss
+                totalDebt
+                totalGain
+                totalLoss
+                timestamp
+                transaction { hash blockNumber }
+            }
+            previousReport {
+                id
+                gain
+                loss
+                totalDebt
+                totalGain
+                totalLoss
+                timestamp
+                transaction { hash blockNumber }
+            }
+          }
+        }
+      }
+  }
+`;
+
 export const querySubgraphStrategyReports = async (
     strategyAddresses: string[],
     network: Network = Network.mainnet
@@ -111,5 +160,3 @@ export const querySubgraphStrategyReports = async (
 
     return queryResult?.data?.strategies ?? [];
 };
-
-export const querySubgraphData = memoize(querySubgraph);

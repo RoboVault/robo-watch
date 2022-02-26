@@ -1,119 +1,10 @@
 import { difference, omit, memoize } from 'lodash';
-import { Network } from '../types';
+import { Network, StratReportGraphType } from '../types';
 import { getService } from '../services/VaultService';
 
 import { StrategyReportContextValue } from '../contexts/StrategyReportContext';
 
 const OMIT_FIELDS = ['results', 'transaction', 'id'];
-
-export const buildReportsQuery = (strategies: string[]): string => `
-{
-    strategies(where: {
-      id_in: ["${strategies.join('","')}"]
-    }) {
-        id
-        reports(first: 10, orderBy: timestamp, orderDirection: desc)  {
-          id
-          transaction {
-            hash
-          }
-          timestamp
-          gain
-          loss
-          totalGain
-          totalLoss
-          totalDebt
-          debtLimit
-          debtAdded
-          debtPaid
-          results {
-            startTimestamp
-            endTimestamp
-            duration
-            apr
-            durationPr
-            currentReport {
-                id
-                gain
-                loss
-                totalDebt
-                totalGain
-                totalLoss
-                timestamp
-                transaction { hash blockNumber }
-            }
-            previousReport {
-                id
-                gain
-                loss
-                totalDebt
-                totalGain
-                totalLoss
-                timestamp
-                transaction { hash blockNumber }
-            }
-          }
-        }
-      }
-  }
-`;
-
-type StratReportGraphType = {
-    debtAdded: string;
-    debtLimit: string;
-    debtPaid: string;
-    gain: string;
-    loss: string;
-    timestamp: string;
-    totalDebt: string;
-    totalGain: string;
-    totalLoss: string;
-    results: Array<{
-        apr: string;
-        duration: string;
-        durationPr: string;
-        startTimestamp: string;
-        endTimestamp: string;
-        currentReport: {
-            id: string;
-            gain: string;
-            loss: string;
-            totalDebt: string;
-            totalGain: string;
-            totalLoss: string;
-            timestamp: number;
-            transaction: {
-                hash: string;
-            };
-        };
-        previousReport: {
-            id: string;
-            gain: string;
-            loss: string;
-            totalDebt: string;
-            totalGain: string;
-            totalLoss: string;
-            timestamp: number;
-            transaction: {
-                hash: string;
-            };
-        };
-    }>;
-    transaction: {
-        hash: string;
-    };
-};
-
-export type StrategyWithReports = {
-    id: string;
-    reports: StratReportGraphType[];
-};
-
-export type StratReportGraphResult = {
-    data: {
-        strategies: StrategyWithReports[];
-    };
-};
 
 export type StrategyReport = {
     debtAdded: string;
@@ -198,7 +89,7 @@ const _parseReportValues = (
     });
 };
 
-export const _getReportsForStrategies = async (
+const _getReportsForStrategies = async (
     strategies: string[],
     network: Network,
     strategyReportContext: StrategyReportContextValue

@@ -20,8 +20,8 @@ import {
     QueryParam,
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
+    StrategyWithReports,
 } from '../../types';
-import { StrategyWithReports } from '../../utils';
 
 type StrategyBasicData = {
     [vault: string]: StrategyApi[];

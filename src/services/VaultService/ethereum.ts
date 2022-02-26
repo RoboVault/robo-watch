@@ -7,8 +7,8 @@ import {
     QueryParam,
     DEFAULT_NETWORK,
     StrategyMetaData,
+    StrategyWithReports,
 } from '../../types';
-import { StrategyWithReports } from '../../utils';
 import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import {

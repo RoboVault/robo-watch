@@ -4,7 +4,7 @@ import memoize from 'lodash/memoize';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import { mapVaultDataToVault } from '../../utils/vaultDataMapping';
 import { sortVaultsByVersion } from './mappings';
-
+import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 import {
     NetworkId,
     Network,
@@ -14,9 +14,8 @@ import {
     QueryParam,
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
+    StrategyWithReports,
 } from '../../types';
-import { StrategyWithReports } from '../../utils';
-import { querySubgraphStrategyReports } from '../../utils/apisRequest';
 
 export default class RoboFantomService implements VaultService {
     private readonly roboSdk: RoboSdk;

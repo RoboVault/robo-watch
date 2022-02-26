@@ -1,7 +1,7 @@
 import { Vault } from './vault';
 import { QueryParam } from './query-param';
 import { StrategyMetaData } from './strategy';
-import { StrategyWithReports } from '../utils';
+import { StrategyWithReports } from '../types';
 
 export enum Network {
     mainnet = 'ethereum',
