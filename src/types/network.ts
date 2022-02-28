@@ -9,7 +9,7 @@ export enum Network {
     arbitrum = 'arbitrum',
 }
 
-export const DEFAULT_NETWORK = Network.mainnet;
+export const DEFAULT_NETWORK = Network.fantom;
 
 export enum NetworkId {
     mainnet = 1,

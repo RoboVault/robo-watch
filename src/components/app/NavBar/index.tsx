@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,8 +11,6 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import logoRoboVaultLight from '../../../images/logo_robo_vault.png';
 import logoRoboVaultDark from '../../../images/logo_robo_vault.png';
 import Link from '@material-ui/core/Link';
-import NetworkSelect from '../../common/NetworkSelect';
-import { Network } from '../../../types';
 
 const StyledAppBar = styled(AppBar)`
     background-color: transparent !important;
@@ -58,16 +55,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export const NavBar: React.FC<NavBarProps> = ({ themeToggler, theme }) => {
-    const [currentNetwork, setCurrentNetwork] = React.useState<Network>(
-        Network.mainnet
-    );
-    const { pathname } = useLocation();
+    // Robo currently only supports Fantom so no need for the NetworkSelect dropdown
 
-    useEffect(() => {
-        Object.values(Network).map((network) => {
-            if (pathname.includes(network)) setCurrentNetwork(network);
-        });
-    }, [pathname]);
+    // const [currentNetwork, setCurrentNetwork] =
+    //     React.useState<Network>(DEFAULT_NETWORK);
+    // const { pathname } = useLocation();
+
+    // useEffect(() => {
+    //     Object.values(Network).map((network) => {
+    //         if (pathname.includes(network)) setCurrentNetwork(network);
+    //     });
+    // }, [pathname]);
 
     const classes = useStyles();
     return (
@@ -87,10 +85,11 @@ export const NavBar: React.FC<NavBarProps> = ({ themeToggler, theme }) => {
                         </Link>
                     </div>
                     <StyleNetworkSelect>
-                        <NetworkSelect
+                        {/* Robo currently only supports Fantom so no need for the NetworkSelect dropdown */}
+                        {/* <NetworkSelect
                             theme={theme}
                             currentNetwork={currentNetwork}
-                        />
+                        /> */}
                     </StyleNetworkSelect>
                     <IconButton
                         aria-controls="menu-appbar"
