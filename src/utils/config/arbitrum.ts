@@ -21,9 +21,6 @@ const MANAGEMENT = '0x6346282DB8323A54E840c6C772B4399C9c655C0d';
 const TREASURY_ENS = 'treasury';
 const TREASURY = '0x1DEb47dCC9a35AD454Bf7f0fCDb03c09792C08c1';
 
-const MANAGEMENT_FEE = 200;
-const PERF_FEE = 1000;
-
 const ARB_USDC_ADDRESS = '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8';
 const ARB_ORACLE_CONTRACT_ADDRESS =
     '0x043518AB266485dC085a1DB095B8d9C2Fc78E9b9';
@@ -37,9 +34,7 @@ export const arbitrum: NetworkConfig = {
         toAddressConfig(GOVERNANCE, GOVERNANCE_ENS),
         toAddressConfig(GUARDIAN, GUARDIAN_ENS),
         toAddressConfig(MANAGEMENT, MANAGEMENT_ENS),
-        toAddressConfig(TREASURY, TREASURY_ENS),
-        MANAGEMENT_FEE,
-        PERF_FEE
+        toAddressConfig(TREASURY, TREASURY_ENS)
     ),
     toTokenExplorerUrl: (token: string): string =>
         `https://arbiscan.io/token/${token}`,

@@ -5,7 +5,6 @@ import {
     toNetworkConfig,
 } from '../../types';
 
-// TODO: droidmuncher: figure out how to handle dev & prod environments
 const FANTOM_SUBGRAPH_URL =
     'https://api.thegraph.com/subgraphs/name/droidmuncher/robo-vault-dev-subgraph';
 
@@ -27,12 +26,6 @@ const MANAGEMENT = '0x7601630eC802952ba1ED2B6e4db16F699A0a5A87';
 const TREASURY_ENS = 'treasury';
 const TREASURY = '0xD074CDae76496d81Fab83023fee4d8631898bBAf';
 
-// Changed to match Robo vaults
-const MANAGEMENT_FEE = 0;
-
-// Changed to match Robo vaults
-const PERFORMANCE_FEE = 800;
-
 const FTM_USDC_ADDRESS = '0x04068da6c83afcfa0e13ba15a6696662335d5b75';
 const FTM_ORACLE_CONTRACT_ADDRESS =
     '0x57aa88a0810dfe3f9b71a9b179dd8bf5f956c46a';
@@ -45,9 +38,7 @@ export const roboFantom: NetworkConfig = {
         toAddressConfig(GOVERNANCE, GOVERNANCE_ENS),
         toAddressConfig(GUARDIAN, GUARDIAN_ENS),
         toAddressConfig(MANAGEMENT, MANAGEMENT_ENS),
-        toAddressConfig(TREASURY, TREASURY_ENS),
-        MANAGEMENT_FEE,
-        PERFORMANCE_FEE
+        toAddressConfig(TREASURY, TREASURY_ENS)
     ),
     toTokenExplorerUrl: (token: string): string =>
         `https://ftmscan.com/token/${token}`,

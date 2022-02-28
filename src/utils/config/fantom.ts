@@ -21,9 +21,6 @@ const MANAGEMENT = '0x72a34AbafAB09b15E7191822A679f28E067C4a16';
 const TREASURY_ENS = 'treasury';
 const TREASURY = '0x89716ad7edc3be3b35695789c475f3e7a3deb12a';
 
-const MANAGEMENT_FEE = 200;
-const PERF_FEE = 1000;
-
 const FTM_USDC_ADDRESS = '0x04068da6c83afcfa0e13ba15a6696662335d5b75';
 const FTM_ORACLE_CONTRACT_ADDRESS =
     '0x57aa88a0810dfe3f9b71a9b179dd8bf5f956c46a';
@@ -37,9 +34,7 @@ export const fantom: NetworkConfig = {
         toAddressConfig(GOVERNANCE, GOVERNANCE_ENS),
         toAddressConfig(GUARDIAN, GUARDIAN_ENS),
         toAddressConfig(MANAGEMENT, MANAGEMENT_ENS),
-        toAddressConfig(TREASURY, TREASURY_ENS),
-        MANAGEMENT_FEE,
-        PERF_FEE
+        toAddressConfig(TREASURY, TREASURY_ENS)
     ),
     toTokenExplorerUrl: (token: string): string =>
         `https://ftmscan.com/token/${token}`,
