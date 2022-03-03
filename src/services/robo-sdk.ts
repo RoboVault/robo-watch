@@ -78,7 +78,7 @@ export class RoboSdk {
             icon: iconUrl,
             symbol: symbol,
             name: name,
-            want: tokenAddress, // TODO droidmuncher: Is this correct?
+            want: tokenAddress,
             token: {
                 address: tokenAddress,
                 decimals: decimals,
