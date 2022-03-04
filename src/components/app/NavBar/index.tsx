@@ -65,7 +65,7 @@ export const NavBar: React.FC<NavBarProps> = ({ themeToggler, theme }) => {
 
                         <Grid item>
                             <StyledWatchTitle variant="h2">
-                                Watch
+                                Robo Watch
                             </StyledWatchTitle>
                         </Grid>
 
