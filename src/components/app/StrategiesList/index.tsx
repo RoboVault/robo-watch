@@ -21,7 +21,7 @@ import {
     displayAmount,
     formatBPS,
 } from '../../../utils/commonUtils';
-import { isStrategyActiveWithZeroDebt } from '../../../utils/alerts';
+import { doesStrategyHaveZeroDebt } from '../../../utils/alerts';
 import { Network, Strategy, Vault } from '../../../types';
 import DebTooltip from '../../common/DebToolTip';
 import { useStrategyReportContext } from '../../../contexts/StrategyReportContext';
@@ -34,7 +34,7 @@ type StrategiesListProps = {
 };
 
 const shouldHighlightStrategy = (strat: Strategy) => {
-    return isStrategyActiveWithZeroDebt(strat);
+    return doesStrategyHaveZeroDebt(strat);
 };
 const StyledDivRoot = styled.div`
     && {
@@ -189,7 +189,7 @@ const _StrategiesList = (props: StrategiesListProps) => {
                         defaultExpanded={expand}
                         style={{
                             border: shouldHighlightStrategy(strategy)
-                                ? '5px solid #ff6c6c'
+                                ? '4px solid grey'
                                 : '',
                         }}
                     >
