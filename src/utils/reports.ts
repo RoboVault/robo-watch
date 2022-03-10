@@ -1,124 +1,10 @@
-import { difference, get, omit, memoize } from 'lodash';
-import { Network } from '../types';
-import { querySubgraphData } from './apisRequest';
+import { difference, omit, memoize } from 'lodash';
+import { Network, StratReportGraphType } from '../types';
+import { getService } from '../services/VaultService';
 
 import { StrategyReportContextValue } from '../contexts/StrategyReportContext';
 
 const OMIT_FIELDS = ['results', 'transaction', 'id'];
-
-const buildReportsQuery = (strategies: string[]): string => `
-{
-    strategies(where: {
-      id_in: ["${strategies.join('","')}"]
-    }) {
-        id
-        reports(first: 10, orderBy: timestamp, orderDirection: desc)  {
-          id
-          transaction {
-            hash
-          }
-          timestamp
-          gain
-          loss
-          totalGain
-          totalLoss
-          totalDebt
-          debtLimit
-          debtAdded
-          debtPaid
-          results {
-            startTimestamp
-            endTimestamp
-            duration
-            apr
-            durationPr
-            currentReport {
-                id
-                gain
-                loss
-                totalDebt
-                totalGain
-                totalLoss
-                timestamp
-                transaction { hash blockNumber }
-            }
-            previousReport {
-                id
-                gain
-                loss
-                totalDebt
-                totalGain
-                totalLoss
-                timestamp
-                transaction { hash blockNumber }
-            }
-          }
-        }
-      }
-  }
-`;
-
-type StratReportGraphType = {
-    debtAdded: string;
-    debtLimit: string;
-    debtPaid: string;
-    gain: string;
-    loss: string;
-    timestamp: string;
-    totalDebt: string;
-    totalGain: string;
-    totalLoss: string;
-    results: Array<{
-        apr: string;
-        duration: string;
-        durationPr: string;
-        startTimestamp: string;
-        endTimestamp: string;
-        currentReport: {
-            id: string;
-            gain: string;
-            loss: string;
-            totalDebt: string;
-            totalGain: string;
-            totalLoss: string;
-            timestamp: number;
-            transaction: {
-                hash: string;
-            };
-        };
-        previousReport: {
-            id: string;
-            gain: string;
-            loss: string;
-            totalDebt: string;
-            totalGain: string;
-            totalLoss: string;
-            timestamp: number;
-            transaction: {
-                hash: string;
-            };
-        };
-    }>;
-    transaction: {
-        hash: string;
-    };
-};
-
-type StratReportGraphResult = {
-    data: {
-        strategies: [
-            {
-                id: string;
-                reports: StratReportGraphType[];
-            }
-        ];
-    };
-};
-
-type Strategy = {
-    id: string;
-    reports: StratReportGraphType[];
-};
 
 export type StrategyReport = {
     debtAdded: string;
@@ -203,7 +89,7 @@ const _parseReportValues = (
     });
 };
 
-export const _getReportsForStrategies = async (
+const _getReportsForStrategies = async (
     strategies: string[],
     network: Network,
     strategyReportContext: StrategyReportContextValue
@@ -220,24 +106,20 @@ export const _getReportsForStrategies = async (
 
     // Only query for uncached strategies
     const strategiesToQuery = difference(strategies, cachedStrategies);
-    if (strategiesToQuery.length > 0) {
-        const reportResults: StratReportGraphResult = await querySubgraphData(
-            buildReportsQuery(strategiesToQuery.map((s) => s.toLowerCase())),
-            network
-        );
+    if (strategiesToQuery.length <= 0) return;
 
-        const strategyResults: Strategy[] = get(
-            reportResults,
-            'data.strategies',
-            []
-        );
-        strategyResults.forEach((results) => {
-            strategyReports[results.id.toLowerCase()] = _parseReportValues(
-                results.reports
-            );
-        });
-        updateStrategyReports(strategyReports);
+    const service = getService(network);
+
+    const reportsByStrategy = await service.getStrategyReports(
+        strategiesToQuery
+    );
+
+    for (const strategy of reportsByStrategy) {
+        const parsedReports = _parseReportValues(strategy.reports);
+        strategyReports[strategy.id.toLowerCase()] = parsedReports;
     }
+
+    updateStrategyReports(strategyReports);
 };
 
 export const getReportsForStrategies = memoize(_getReportsForStrategies);

@@ -1,12 +1,11 @@
 import { Yearn } from '@yfi/sdk';
 import { utils } from 'ethers';
 import memoize from 'lodash/memoize';
-import { JsonRpcProvider } from '@ethersproject/providers';
 import { getEthersDefaultProvider } from '../../utils/ethers';
 import { mapVaultDataToVault } from '../../utils/vaultDataMapping';
-import { querySubgraphData } from '../../utils/apisRequest';
 import { mapVaultSdkToVaultApi, sortVaultsByVersion } from './mappings';
-
+import { Subgraph } from '../subgraph';
+import getNetworkConfig from '../../utils/config';
 import {
     NetworkId,
     Network,
@@ -17,33 +16,25 @@ import {
     QueryParam,
     DEFAULT_QUERY_PARAM,
     StrategyMetaData,
+    StrategyWithReports,
 } from '../../types';
 
 type StrategyBasicData = {
     [vault: string]: StrategyApi[];
 };
 
-type VaultGQLResult = {
-    id: string;
-    strategies: StrategyApi[];
-};
-
-type GQLResult = {
-    data: {
-        vaults: VaultGQLResult[];
-    };
-};
-
 export default class ArbitrumService implements VaultService {
-    private provider: JsonRpcProvider;
+    private subgraph: Subgraph;
     private sdk: Yearn<NetworkId.arbitrum>;
     constructor() {
-        const provider = getEthersDefaultProvider(this.getNetwork());
-        this.provider = provider;
+        const network = this.getNetwork();
+        const provider = getEthersDefaultProvider(network);
         this.sdk = new Yearn(this.getNetworkId(), {
             provider,
             cache: { useCache: false },
         });
+        const config = getNetworkConfig(network);
+        this.subgraph = new Subgraph(config.subgraphUrl);
     }
 
     public getNetwork = (): Network => {
@@ -142,33 +133,17 @@ export default class ArbitrumService implements VaultService {
             );
         }
 
-        const vaultsLower = vaults.map((vault) => vault.toLowerCase());
-        const query = `
-            {
-                vaults(where:{
-                  id_in: ${JSON.stringify(vaultsLower)}
-                }){
-                    id
-                    strategies {
-                        name
-                        address
-                    }
-                }
-            }
-        `;
+        const vaultsWithStrats = await this.subgraph.getVaultsWithStrategies(
+            vaults
+        );
 
-        const results: GQLResult = (await querySubgraphData(
-            query,
-            this.getNetwork()
-        )) as GQLResult;
+        const vaultDict: StrategyBasicData = {};
 
-        const result: StrategyBasicData = {};
-
-        results.data.vaults.forEach(({ id, strategies }) => {
-            result[id] = strategies;
+        vaultsWithStrats.forEach(({ id, strategies }) => {
+            vaultDict[id] = strategies;
         });
 
-        return result;
+        return vaultDict;
     };
 
     private _getStrategiesByVaults = memoize(this._getInnerStrategiesByVaults);
@@ -191,4 +166,10 @@ export default class ArbitrumService implements VaultService {
             description: metaData?.description,
         };
     };
+
+    public async getStrategyReports(
+        strategyAddresses: string[]
+    ): Promise<StrategyWithReports[]> {
+        return this.subgraph.getStrategyReports(strategyAddresses);
+    }
 }

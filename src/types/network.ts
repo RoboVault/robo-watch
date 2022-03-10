@@ -1,6 +1,7 @@
 import { Vault } from './vault';
 import { QueryParam } from './query-param';
 import { StrategyMetaData } from './strategy';
+import { StrategyWithReports } from '../types';
 
 export enum Network {
     mainnet = 'ethereum',
@@ -8,7 +9,7 @@ export enum Network {
     arbitrum = 'arbitrum',
 }
 
-export const DEFAULT_NETWORK = Network.mainnet;
+export const DEFAULT_NETWORK = Network.fantom;
 
 export enum NetworkId {
     mainnet = 1,
@@ -30,4 +31,7 @@ export interface VaultService {
         vaultAddress: string,
         strategyAddress: string
     ) => Promise<StrategyMetaData>;
+    getStrategyReports(
+        strategyAddresses: string[]
+    ): Promise<StrategyWithReports[]>;
 }

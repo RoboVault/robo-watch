@@ -5,7 +5,7 @@ const useStyles = makeStyles({
     resultText: {
         width: '90%',
         padding: '10px',
-        color: 'white',
+        color: '#7b7b7b',
         textAlign: 'center',
     },
 });

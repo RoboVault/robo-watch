@@ -37,14 +37,20 @@ const checks = [
     },
     {
         field: 'managementFee',
-        validate: (value: ValueLike, networkConfig: NetworkConfig): boolean =>
-            typeof value === 'number' && networkConfig.isManagementFee(value),
+        validate: (
+            value: ValueLike,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            networkConfig: NetworkConfig
+        ): boolean => typeof value === 'number',
         error: 'value incorrect for management fee',
     },
     {
         field: 'performanceFee',
-        validate: (value: ValueLike, networkConfig: NetworkConfig): boolean =>
-            typeof value === 'number' && networkConfig.isPerformanceFee(value),
+        validate: (
+            value: ValueLike,
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            networkConfig: NetworkConfig
+        ): boolean => typeof value === 'number',
         error: 'value incorrect for performance fee',
     },
     {

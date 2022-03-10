@@ -8,3 +8,4 @@ export * from './network';
 export * from './query-param';
 export * from './network-config';
 export * from './address-config';
+export * from './subgraph';
