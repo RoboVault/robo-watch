@@ -7,7 +7,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { Alert } from '@material-ui/lab';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import Avatar from '@material-ui/core/Avatar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
@@ -25,6 +24,7 @@ import { ErrorAlert } from '../../common/Alerts';
 import ReactHelmet from '../../common/ReactHelmet';
 import ProgressSpinnerBar from '../../common/ProgressSpinnerBar/ProgressSpinnerBar';
 import { GlobalStylesLoading } from '../../theme/globalStyles';
+import { VaultIcon } from '../../common/VaultIcon';
 
 const StyledCard = styled(Card).withConfig({
     shouldForwardProp: (props) => !(props.toString() in ['config', 'bck']),
@@ -231,12 +231,7 @@ export const SingleVault = (props: SingleVaultProps) => {
                                 }
                             >
                                 <CardHeader
-                                    avatar={
-                                        <Avatar
-                                            src={vault ? vault.icon : ''}
-                                            aria-label="recipe"
-                                        />
-                                    }
+                                    avatar={<VaultIcon name={vault?.icon} />}
                                     title={
                                         <StyledTitle>
                                             {vault ? vault.name : ''}

@@ -8,33 +8,6 @@ import {
     VaultWithStrategies,
 } from '../types';
 
-const vaultIcons = [
-    {
-        token: 'USDC',
-        url: 'https://cryptologos.cc/logos/usd-coin-usdc-logo.png',
-    },
-    {
-        token: 'WFTM',
-        url: 'https://www.robo-vault.com/static/media/FTM.36219035.png',
-    },
-    {
-        token: 'WETH',
-        url: 'https://www.robo-vault.com/static/media/ETH.86b356aa.png',
-    },
-    {
-        token: 'WBTC',
-        url: 'https://www.robo-vault.com/static/media/BTC.d6a21bc3.png',
-    },
-    {
-        token: 'MIM',
-        url: 'https://www.robo-vault.com/static/media/MIM.0ed572ce.png',
-    },
-    {
-        token: 'DAI',
-        url: 'https://www.robo-vault.com/static/media/DAI.26d4501f.png',
-    },
-];
-
 export class RoboSdk {
     constructor(
         private readonly provider: ethers.providers.JsonRpcProvider,
@@ -68,14 +41,15 @@ export class RoboSdk {
         const performanceFee = parseInt(await vaultContract.performanceFee());
         const totalAssets = BigNumber.from(await vaultContract.totalAssets());
 
-        const iconUrl = this.findVaultIcon(name);
+        // All vault icon pngs are named after the symbol. Replace slash to prevent it messing with paths
+        const iconName = symbol.replace('/', '-');
 
         const vaultDetails: VaultApi = {
             address: vault.id,
             apiVersion: apiVersion,
             decimals: decimals,
             endorsed: true,
-            icon: iconUrl,
+            icon: iconName,
             symbol: symbol,
             name: name,
             want: tokenAddress,
@@ -83,7 +57,7 @@ export class RoboSdk {
                 address: tokenAddress,
                 decimals: decimals,
                 symbol: symbol,
-                icon: iconUrl,
+                icon: iconName,
                 name: name,
             },
             type: VaultVersion.V2,
@@ -110,17 +84,5 @@ export class RoboSdk {
     private getVaultContract(vaultAddress: string): ethers.Contract {
         const abiString = JSON.stringify(RoboVaultAbiV3.abi);
         return new ethers.Contract(vaultAddress, abiString, this.provider);
-    }
-
-    private findVaultIcon(vaultName: string): string {
-        const vaultNameSplit = vaultName.toUpperCase().split(' ');
-
-        const icon = vaultIcons.find((icon) =>
-            vaultNameSplit.some((str) => str === icon.token)
-        );
-
-        return icon !== undefined
-            ? icon.url
-            : 'http://cdn.onlinewebfonts.com/svg/img_554507.png';
     }
 }

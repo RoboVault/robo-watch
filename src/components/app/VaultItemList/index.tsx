@@ -7,8 +7,6 @@ import MuiAccordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Network, Vault } from '../../../types';
 import { StrategiesList } from '../StrategiesList';
@@ -19,6 +17,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { ReportProblem } from '@material-ui/icons';
 import { Typography } from '@material-ui/core';
 import { HtmlTooltip } from '../../common/HtmlTooltip';
+import { VaultIcon } from '../../common/VaultIcon';
 
 type VaultItemListProps = {
     vault: Vault;
@@ -119,26 +118,7 @@ const _VaultItemList = (props: VaultItemListProps) => {
                                 alignItems="center"
                             >
                                 <Grid item md={1} xs={3}>
-                                    {vault && vault.icon ? (
-                                        <ListItemAvatar>
-                                            {
-                                                <Avatar
-                                                    alt={vault.icon}
-                                                    src={vault.icon}
-                                                />
-                                            }
-                                        </ListItemAvatar>
-                                    ) : (
-                                        <ListItemAvatar>
-                                            <Avatar
-                                                style={{
-                                                    color: 'transparent',
-                                                }}
-                                            >
-                                                .
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                    )}
+                                    <VaultIcon name={vault?.icon} />
                                 </Grid>
                                 <Grid item md={4} xs={9}>
                                     {vault.configErrors ? (
