@@ -10,6 +10,7 @@ import { Network, Vault } from '../../../types';
 import SearchInput, { Flags } from '../SearchInput';
 import { VaultItemList } from '../../app';
 import { EMPTY_ADDRESS } from '../../../utils/commonUtils';
+import { VaultType } from '../VaultTypeSelector';
 
 const StyledReportContainer = styled.div`
     && {
@@ -92,18 +93,33 @@ const _VaultsList = (props: VaultsListProps) => {
     );
 
     const onFilter = useCallback(
-        (newText: string, flags: Flags, health: string) => {
+        (
+            vaultType: VaultType,
+            newText: string,
+            flags: Flags,
+            health: string
+        ) => {
             console.time('timer');
+
+            let filteredVaults = items.filter((vault: Vault) => {
+                const isDegenVault = vault.name
+                    .toLowerCase()
+                    .includes(VaultType.Degen);
+                return vaultType == VaultType.Degen
+                    ? isDegenVault
+                    : !isDegenVault;
+            });
+
             const hasFlags = flags.onlyWithWarnings;
             if (!hasFlags && newText.trim() === '' && health.trim() === '') {
                 console.log('click clear');
                 console.time('clear');
-                setFilteredItems(items);
-                setTotalStrategiesFound(getTotalStrategies(items));
+                setFilteredItems(filteredVaults);
+                setTotalStrategiesFound(getTotalStrategies(filteredVaults));
                 console.timeEnd('clear');
             } else {
                 let totalStrategiesFound = 0;
-                const filteredItems = items
+                filteredVaults = filteredVaults
                     .filter((item: Vault) => {
                         const applyFlags =
                             !flags.onlyWithWarnings ||
@@ -133,7 +149,7 @@ const _VaultsList = (props: VaultsListProps) => {
                         totalStrategiesFound += healthFilteredStrategies.length;
                         return healthFilteredStrategies.length > 0;
                     });
-                setFilteredItems(filteredItems);
+                setFilteredItems(filteredVaults);
                 setTotalStrategiesFound(totalStrategiesFound);
             }
             console.timeEnd('timer');

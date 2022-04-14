@@ -19,6 +19,7 @@ import ProgressSpinnerBar from '../../common/ProgressSpinnerBar/ProgressSpinnerB
 import { Delete, Search } from '@material-ui/icons';
 import ResultsLabel from '../ResultsLabel';
 import WarningLabel from '../WarningLabel';
+import { VaultTypeSelector, VaultType } from '../VaultTypeSelector';
 
 const StyledForm = styled.form`
     && {
@@ -57,6 +58,7 @@ const StyledContainer = styled(Container)`
         border-radius: 8px;
     }
 `;
+
 const StyledContainerResult = styled(Container)`
     && {
         width: 90%;
@@ -92,7 +94,12 @@ type SearchInputProps = {
     foundItems: number;
     totalSubItems: number;
     foundSubItems: number;
-    onFilter: (text: string, flags: Flags, health: string) => void;
+    onFilter: (
+        vaultType: VaultType,
+        text: string,
+        flags: Flags,
+        health: string
+    ) => void;
 };
 
 const getCurrentFlags = (onlyWithWarnings: boolean) => ({
@@ -108,6 +115,7 @@ const SearchInput = (props: SearchInputProps) => {
         totalSubItems,
         foundSubItems,
     } = props;
+    const [vaultType, setVaultType] = useState<VaultType>(VaultType.Standard);
     const [searchText, setSearchText] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     const [filterVaultsWithWarnings, setFilterVaultsWithWarnings] =
@@ -117,7 +125,12 @@ const SearchInput = (props: SearchInputProps) => {
     const debounceFilter = useCallback(
         debounce((newSearchText, flags) => {
             const newSearchTextLowerCase = newSearchText.toLowerCase();
-            onFilter(newSearchTextLowerCase, flags, healthCheckFilter);
+            onFilter(
+                vaultType,
+                newSearchTextLowerCase,
+                flags,
+                healthCheckFilter
+            );
             setIsSearching(false);
         }, debounceWait),
         [debounceWait, isSearching]
@@ -140,28 +153,48 @@ const SearchInput = (props: SearchInputProps) => {
             setIsSearching(true);
             const newSearchTextLowerCase = searchText.toLowerCase();
             onFilter(
+                vaultType,
                 newSearchTextLowerCase,
                 getCurrentFlags(e.target.checked),
                 healthCheckFilter
             );
             setIsSearching(false);
         },
-        [searchText, isSearching, healthCheckFilter]
+        [vaultType, searchText, isSearching, healthCheckFilter]
     );
+
     const handleClickClearSearch = useCallback(() => {
         setSearchText('');
         setFilterVaultsWithWarnings(false);
-        onFilter('', getCurrentFlags(false), '');
+        onFilter(vaultType, '', getCurrentFlags(false), '');
     }, [onFilter]);
+
     const healthCheckFilterChange = useCallback(
         (e: ChangeEvent<{ name?: string; value: unknown }>) => {
             setHealthCheckFilter((e.target as HTMLInputElement).value);
             setIsSearching(true);
             const newSearchTextLowerCase = searchText.toLowerCase();
             onFilter(
+                vaultType,
                 newSearchTextLowerCase,
                 getCurrentFlags(filterVaultsWithWarnings),
                 (e.target as HTMLInputElement).value
+            );
+            setIsSearching(false);
+        },
+        [searchText, healthCheckFilter, isSearching]
+    );
+
+    const handleVaultTypeChange = useCallback(
+        (newVaultType: VaultType) => {
+            setVaultType(newVaultType);
+            setIsSearching(true);
+            const newSearchTextLowerCase = searchText.toLowerCase();
+            onFilter(
+                newVaultType,
+                newSearchTextLowerCase,
+                getCurrentFlags(filterVaultsWithWarnings),
+                healthCheckFilter
             );
             setIsSearching(false);
         },
@@ -209,8 +242,14 @@ const SearchInput = (props: SearchInputProps) => {
     return (
         <div>
             <StyledForm>
-                <Grid container direction="row" alignItems="center" spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                <Grid container direction="row" alignItems="center" spacing={1}>
+                    <Grid item xs={12} sm={3}>
+                        <VaultTypeSelector
+                            selected={vaultType}
+                            onChange={handleVaultTypeChange}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
                         <StyledContainer maxWidth="lg">
                             <StyledTextField
                                 variant="outlined"
