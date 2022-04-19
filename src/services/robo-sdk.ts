@@ -41,8 +41,14 @@ export class RoboSdk {
         const performanceFee = parseInt(await vaultContract.performanceFee());
         const totalAssets = BigNumber.from(await vaultContract.totalAssets());
 
-        // All vault icon pngs are named after the symbol. Replace slash to prevent it messing with paths
-        const iconName = symbol.replace('/', '-');
+        // All vault icon pngs are named after the symbol.
+        // Replace slash to prevent it messing with paths.
+        // Remove rv & dv prefixes so icons work with both robo & degen vaults.
+        const iconName = symbol
+            .replace('/', '-')
+            .replace('rvs', '')
+            .replace('rv', '')
+            .replace('dv', '');
 
         const vaultDetails: VaultApi = {
             address: vault.id,
