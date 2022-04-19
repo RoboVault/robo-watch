@@ -5,10 +5,8 @@ import {
     toNetworkConfig,
 } from '../../types';
 
-// TODO: Change this to the prod URL when its finished indexing & setup a way to easily swap between dev & prod.
-// Prod: https://api.thegraph.com/subgraphs/name/robovault/robo-vault-subgraph-prod
 const FANTOM_SUBGRAPH_URL =
-    'https://api.thegraph.com/subgraphs/name/robovault/robo-vault-subgraph-dev';
+    'https://api.thegraph.com/subgraphs/name/robovault/robo-vault-subgraph-prod';
 
 // Changed to match Robo vaults
 const GOVERNANCE_ENS = 'governance';

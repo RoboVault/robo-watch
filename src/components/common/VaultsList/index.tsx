@@ -158,9 +158,7 @@ const _VaultsList = (props: VaultsListProps) => {
     );
 
     useEffect(() => {
-        setFilteredItems(items);
-        const totalStrategies = getTotalStrategies(items);
-        setTotalStrategiesFound(totalStrategies);
+        onFilter(VaultType.Standard, '', { onlyWithWarnings: false }, '');
     }, [items, totalStrategies]);
 
     const stillLoading = totalItems !== items.length;
